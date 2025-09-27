@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TRPCProvider } from "@/trpc/client";
+import { TRPCReactProvider } from "../trpc/client";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <TRPCProvider>{children}</TRPCProvider>
+        <TRPCReactProvider>
+          {children}
+        </TRPCReactProvider>
       </body>
     </html>
   );
