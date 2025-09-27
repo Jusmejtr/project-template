@@ -1,18 +1,17 @@
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { getQueryClient, trpc } from '../trpc/server';
-import { ClientGreeting } from './client-greeting';
-export default async function Home() {
-  const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(
+import { HydrateClient, prefetch, trpc } from "../trpc/server";
+import { ClientGreeting } from "./client-greeting";
+export default function Home() {
+  prefetch(
     trpc.hello.queryOptions({
-      text: 'from tRPC',
-    }),
+      /** input */
+      text: "world",
+    })
   );
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
+    <HydrateClient>
       <div>...</div>
       {/** ... */}
       <ClientGreeting />
-    </HydrationBoundary>
+    </HydrateClient>
   );
 }
